@@ -209,8 +209,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
                                 // Core validation
                                 if (email.isEmpty || password.isEmpty) {
-                                  AppSnackbars.showErrorSnackbar(
-                                    context,
+                                  AppSnackbars.showError(
                                     'Please make sure to fill out all the fields!',
                                   );
                                   return;
@@ -225,8 +224,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                       _confirmPasswordController.text.trim();
 
                                   if (username.isEmpty) {
-                                    AppSnackbars.showErrorSnackbar(
-                                      context,
+                                    AppSnackbars.showError(
                                       'Please enter a username for your character!',
                                     );
                                     return;
@@ -234,8 +232,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
                                   // Check if passwords match
                                   if (password != confirmPassword) {
-                                    AppSnackbars.showErrorSnackbar(
-                                      context,
+                                    AppSnackbars.showError(
                                       'Passwords do not match. Please try again.',
                                     );
                                     return;
@@ -277,30 +274,20 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                     } catch (dbError) {
                                       // If profile creation fails, delete the newly created auth user to prevent orphaned accounts
                                       await userCredential.user!.delete();
-                                      if (context.mounted) {
-                                        AppSnackbars.showErrorSnackbar(
-                                          context,
-                                          'You have been kicked out of the tavern for no reason! Please try registering again.',
-                                        );
-                                      }
-                                      return;
+                                      AppSnackbars.showError(
+                                        'You have been kicked out of the tavern for no reason! Please try registering again.',
+                                      );
                                     }
                                   }
                                 } on FirebaseAuthException catch (e) {
-                                  if (context.mounted) {
-                                    AppSnackbars.showErrorSnackbar(
-                                      context,
-                                      e.message ??
-                                          'An error occurred. Please try again.',
-                                    );
-                                  }
+                                  AppSnackbars.showError(
+                                    e.message ??
+                                        'An error occurred. Please try again.',
+                                  );
                                 } catch (e) {
-                                  if (context.mounted) {
-                                    AppSnackbars.showErrorSnackbar(
-                                      context,
-                                      'An unexpected error occurred. Please try again.',
-                                    );
-                                  }
+                                  AppSnackbars.showError(
+                                    'An unexpected error occurred. Please try again.',
+                                  );
                                 }
                               },
                               child: Text(

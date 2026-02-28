@@ -1,33 +1,23 @@
-import 'package:dnd_companion/features/auth/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'features/auth/providers/auth_provider.dart';
+
+import 'core/routing/app_router.dart';
+
+final GlobalKey<ScaffoldMessengerState> rootScaffoldMessengerKey =
+    GlobalKey<ScaffoldMessengerState>();
 
 class DnDCompanionApp extends ConsumerWidget {
   const DnDCompanionApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authState = ref.watch(authStateProvider);
+    final goRouter = ref.watch(goRouterProvider);
 
-    return MaterialApp(
+    return MaterialApp.router(
+      scaffoldMessengerKey: rootScaffoldMessengerKey,
       title: 'Parzival\'s Dice Tavern',
       theme: ThemeData.dark(),
-      home: Scaffold(
-        body: Center(
-          child: authState.when(
-            data: (user) {
-              if (user != null) {
-                return Text('Welcome, ${user.email}');
-              } else {
-                return const LoginScreen();
-              }
-            },
-            error: (error, stack) => Text('Error: $error'),
-            loading: () => CircularProgressIndicator(),
-          ),
-        ),
-      ),
+      routerConfig: goRouter,
     );
   }
 }

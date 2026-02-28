@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../app.dart';
 
 class AppSnackbars {
-  // Private constructor to prevent instantiation
   AppSnackbars._();
 
-  static void showErrorSnackbar(BuildContext context, String message) {
-    if (!context.mounted) return;
-
-    ScaffoldMessenger.of(context).showSnackBar(
+  static void showError(String message) {
+    rootScaffoldMessengerKey.currentState?.showSnackBar(
       SnackBar(
         content: Row(
           children: [
@@ -32,6 +30,4 @@ class AppSnackbars {
       ),
     );
   }
-
-  // You can add more methods for different types of snackbars (e.g., success, info) if needed.
 }

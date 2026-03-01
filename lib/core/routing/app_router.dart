@@ -1,3 +1,4 @@
+import 'package:dnd_companion/features/characters/screens/character_creation_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -38,7 +39,10 @@ final goRouterProvider = Provider<GoRouter>((ref) {
     // THE ROUTES
     routes: [
       GoRoute(path: '/login', builder: (context, state) => const LoginScreen()),
-
+      GoRoute(
+        path: '/create-character',
+        builder: (context, state) => const CharacterCreationScreen(),
+      ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
           return FoyerShell(navigationShell: navigationShell);

@@ -23,6 +23,8 @@ class CharacterDraft {
   final String bonds;
   final String flaws;
   final String backstory;
+  final String customBackgroundName;
+  final String customBackgroundDescription;
 
   // --- Step D: Abilities (Base Scores) ---
   final String generationMethod;
@@ -61,6 +63,8 @@ class CharacterDraft {
     this.baseCha = 8,
     this.startingEquipment = const [],
     this.startingGold = 0,
+    this.customBackgroundName = '',
+    this.customBackgroundDescription = '',
   });
 
   // The secret sauce: This lets us copy the current draft and change just ONE piece of data
@@ -93,6 +97,8 @@ class CharacterDraft {
     int? baseCha,
     List<String>? startingEquipment,
     int? startingGold,
+    String? customBackgroundName,
+    String? customBackgroundDescription,
   }) {
     return CharacterDraft(
       name: name ?? this.name,
@@ -123,6 +129,9 @@ class CharacterDraft {
       baseCha: baseCha ?? this.baseCha,
       startingEquipment: startingEquipment ?? this.startingEquipment,
       startingGold: startingGold ?? this.startingGold,
+      customBackgroundName: customBackgroundName ?? this.customBackgroundName,
+      customBackgroundDescription:
+          customBackgroundDescription ?? this.customBackgroundDescription,
     );
   }
 }

@@ -57,6 +57,45 @@ class CharacterDraftNotifier extends Notifier<CharacterDraft> {
     }
   }
 
+  // Step C: Update Background & Details
+  void updateBackgroundDetails({
+    String? background,
+    String? customBackgroundName,
+    String? customBackgroundDescription,
+    String? alignment,
+    String? gender,
+    String? age,
+    String? height,
+    String? weight,
+    String? eyes,
+    String? skin,
+    String? hair,
+    String? personalityTraits,
+    String? ideals,
+    String? bonds,
+    String? flaws,
+    String? backstory,
+  }) {
+    state = state.copyWith(
+      background: background,
+      customBackgroundName: customBackgroundName,
+      customBackgroundDescription: customBackgroundDescription,
+      alignment: alignment,
+      gender: gender,
+      age: age,
+      height: height,
+      weight: weight,
+      eyes: eyes,
+      skin: skin,
+      hair: hair,
+      personalityTraits: personalityTraits,
+      ideals: ideals,
+      bonds: bonds,
+      flaws: flaws,
+      backstory: backstory,
+    );
+  }
+
   // Function called when the user hits cancel or when they successfully create the character
   // The function clears the draft and resets it to the default state.
   void clearDraft() {

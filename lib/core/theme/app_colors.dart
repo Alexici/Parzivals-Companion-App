@@ -12,4 +12,6 @@ class AppColors {
   static const Color abyssalBlack = Color(0xFF000401);
   static const Color glassWhite = Colors.white;
   static const Color accentPurple = Colors.deepPurpleAccent;
+  static const Color legendaryGold = Color(0xFFFFD700);
+  static const Color arcaneBlue = Color(0xFF00D4FF);
 }

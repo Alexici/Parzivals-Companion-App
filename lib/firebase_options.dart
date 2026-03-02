@@ -3,6 +3,14 @@
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+var APIKEY = dotenv.env['APIKEY']!;
+var APIID = dotenv.env['APIID']!;
+var MESSAGINSENDERID = dotenv.env['MESSAGINSENDERID']!;
+var PROJECTID = dotenv.env['PROJECTID']!;
+var AUTHDOMAIN = dotenv.env['AUTHDOMAIN'];
+var STORAGEBUCKET = dotenv.env['STORAGEBUCKET'];
 
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
@@ -52,12 +60,12 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBY9NAfu3DmkfsDO5GSszt0IgpXSZKImHg',
-    appId: '1:153742328739:web:be0137173bc96a84c65016',
-    messagingSenderId: '153742328739',
-    projectId: 'xanathars-companion-app',
-    authDomain: 'xanathars-companion-app.firebaseapp.com',
-    storageBucket: 'xanathars-companion-app.firebasestorage.app',
+  static FirebaseOptions web = FirebaseOptions(
+    apiKey: APIKEY,
+    appId: APIID,
+    messagingSenderId: MESSAGINSENDERID,
+    projectId: PROJECTID,
+    authDomain: AUTHDOMAIN,
+    storageBucket: STORAGEBUCKET,
   );
 }

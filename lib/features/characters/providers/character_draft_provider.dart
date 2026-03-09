@@ -34,29 +34,6 @@ class CharacterDraftNotifier extends Notifier<CharacterDraft> {
     state = state.copyWith(name: newName);
   }
 
-  void updateBaseStat({required String stat, required int value}) {
-    switch (stat) {
-      case 'str':
-        state = state.copyWith(baseStr: value);
-        break;
-      case 'dex':
-        state = state.copyWith(baseDex: value);
-        break;
-      case 'con':
-        state = state.copyWith(baseCon: value);
-        break;
-      case 'int':
-        state = state.copyWith(baseInt: value);
-        break;
-      case 'wis':
-        state = state.copyWith(baseWis: value);
-        break;
-      case 'cha':
-        state = state.copyWith(baseCha: value);
-        break;
-    }
-  }
-
   // Step C: Update Background & Details
   void updateBackgroundDetails({
     String? background,
@@ -93,6 +70,131 @@ class CharacterDraftNotifier extends Notifier<CharacterDraft> {
       bonds: bonds,
       flaws: flaws,
       backstory: backstory,
+    );
+  }
+
+  // Step D: Update Abilities
+  void updateGenerationMethod(String method) {
+    int defaultVal = method == 'Point Buy' ? 8 : 0;
+    state = state.copyWith(
+      generationMethod: method,
+      baseStr: defaultVal,
+      baseDex: defaultVal,
+      baseCon: defaultVal,
+      baseInt: defaultVal,
+      baseWis: defaultVal,
+      baseCha: defaultVal,
+    );
+  }
+
+  void updateBaseStat({required String stat, required int value}) {
+    switch (stat) {
+      case 'STR':
+        state = state.copyWith(baseStr: value);
+        break;
+      case 'DEX':
+        state = state.copyWith(baseDex: value);
+        break;
+      case 'CON':
+        state = state.copyWith(baseCon: value);
+        break;
+      case 'INT':
+        state = state.copyWith(baseInt: value);
+        break;
+      case 'WIS':
+        state = state.copyWith(baseWis: value);
+        break;
+      case 'CHA':
+        state = state.copyWith(baseCha: value);
+        break;
+    }
+  }
+
+  // Clear bonuses
+  void clearBonuses() {
+    state = state.copyWith(
+      bonusStr: 0,
+      bonusDex: 0,
+      bonusCon: 0,
+      bonusInt: 0,
+      bonusWis: 0,
+      bonusCha: 0,
+    );
+  }
+
+  // Update bonuses
+  void updateBonusStat({required String stat, required int value}) {
+    switch (stat) {
+      case 'STR':
+        state = state.copyWith(bonusStr: value);
+        break;
+      case 'DEX':
+        state = state.copyWith(bonusDex: value);
+        break;
+      case 'CON':
+        state = state.copyWith(bonusCon: value);
+        break;
+      case 'INT':
+        state = state.copyWith(bonusInt: value);
+        break;
+      case 'WIS':
+        state = state.copyWith(bonusWis: value);
+        break;
+      case 'CHA':
+        state = state.copyWith(bonusCha: value);
+        break;
+    }
+  }
+
+  // Step E: Equipment
+  void setEquipmentChoice({
+    required String newChoice,
+    required List<String> packageItems,
+    required int startingGold,
+  }) {
+    // 1. If they click the option they already have selected, do nothing!
+    if (state.equipmentChoice == newChoice) return;
+
+    List<String> updatedInventory = List.from(state.inventory);
+
+    // 2. If they are switching AWAY from 'Package', remove the package items
+    if (state.equipmentChoice == 'Package') {
+      for (var item in packageItems) {
+        updatedInventory.remove(item);
+      }
+    }
+
+    // 3. If they are switching TO 'Package', add the package items
+    if (newChoice == 'Package') {
+      updatedInventory.addAll(packageItems);
+    }
+
+    // 4. Save the state
+    state = state.copyWith(
+      equipmentChoice: newChoice,
+      inventory: updatedInventory,
+      gp: startingGold,
+    );
+  }
+
+  void addCustomItem(String item) {
+    if (item.trim().isEmpty) return;
+    state = state.copyWith(inventory: [...state.inventory, item.trim()]);
+  }
+
+  void removeInventoryItem(int index) {
+    final newList = List<String>.from(state.inventory);
+    newList.removeAt(index);
+    state = state.copyWith(inventory: newList);
+  }
+
+  void updateCurrency({int? cp, int? sp, int? ep, int? gp, int? pp}) {
+    state = state.copyWith(
+      cp: cp ?? state.cp,
+      sp: sp ?? state.sp,
+      ep: ep ?? state.ep,
+      gp: gp ?? state.gp,
+      pp: pp ?? state.pp,
     );
   }
 

@@ -29,10 +29,12 @@ class CharacterDraft {
   // --- Step D: Abilities (Base Scores) ---
   final String generationMethod;
   final int baseStr, baseDex, baseCon, baseInt, baseWis, baseCha;
+  final int bonusStr, bonusDex, bonusCon, bonusInt, bonusWis, bonusCha;
 
   // --- Step E: Equipment ---
-  final List<String> startingEquipment;
-  final int startingGold;
+  final String equipmentChoice;
+  final List<String> inventory;
+  final int cp, sp, ep, gp, pp;
 
   const CharacterDraft({
     this.name = '',
@@ -61,13 +63,24 @@ class CharacterDraft {
     this.baseInt = 8,
     this.baseWis = 8,
     this.baseCha = 8,
-    this.startingEquipment = const [],
-    this.startingGold = 0,
+    this.bonusStr = 0,
+    this.bonusDex = 0,
+    this.bonusCon = 0,
+    this.bonusInt = 0,
+    this.bonusWis = 0,
+    this.bonusCha = 0,
+    this.equipmentChoice = '',
+    this.inventory = const [],
+    this.cp = 0,
+    this.sp = 0,
+    this.ep = 0,
+    this.gp = 0,
+    this.pp = 0,
     this.customBackgroundName = '',
     this.customBackgroundDescription = '',
   });
 
-  // The secret sauce: This lets us copy the current draft and change just ONE piece of data
+  // The copyWith method
   CharacterDraft copyWith({
     String? name,
     String? race,
@@ -95,8 +108,19 @@ class CharacterDraft {
     int? baseInt,
     int? baseWis,
     int? baseCha,
-    List<String>? startingEquipment,
-    int? startingGold,
+    int? bonusStr,
+    int? bonusDex,
+    int? bonusCon,
+    int? bonusInt,
+    int? bonusWis,
+    int? bonusCha,
+    String? equipmentChoice,
+    List<String>? inventory,
+    int? cp,
+    int? sp,
+    int? ep,
+    int? gp,
+    int? pp,
     String? customBackgroundName,
     String? customBackgroundDescription,
   }) {
@@ -127,8 +151,19 @@ class CharacterDraft {
       baseInt: baseInt ?? this.baseInt,
       baseWis: baseWis ?? this.baseWis,
       baseCha: baseCha ?? this.baseCha,
-      startingEquipment: startingEquipment ?? this.startingEquipment,
-      startingGold: startingGold ?? this.startingGold,
+      bonusStr: bonusStr ?? this.bonusStr,
+      bonusDex: bonusDex ?? this.bonusDex,
+      bonusCon: bonusCon ?? this.bonusCon,
+      bonusInt: bonusInt ?? this.bonusInt,
+      bonusWis: bonusWis ?? this.bonusWis,
+      bonusCha: bonusCha ?? this.bonusCha,
+      equipmentChoice: equipmentChoice ?? this.equipmentChoice,
+      inventory: inventory ?? this.inventory,
+      cp: cp ?? this.cp,
+      sp: sp ?? this.sp,
+      ep: ep ?? this.ep,
+      gp: gp ?? this.gp,
+      pp: pp ?? this.pp,
       customBackgroundName: customBackgroundName ?? this.customBackgroundName,
       customBackgroundDescription:
           customBackgroundDescription ?? this.customBackgroundDescription,

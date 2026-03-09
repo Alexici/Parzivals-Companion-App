@@ -1,8 +1,10 @@
 import 'dart:ui';
 
 import 'package:dnd_companion/core/theme/app_colors.dart%20';
+import 'package:dnd_companion/features/characters/screens/steps/abilities_step.dart';
 import 'package:dnd_companion/features/characters/screens/steps/background_step.dart';
 import 'package:dnd_companion/features/characters/screens/steps/class_step.dart';
+import 'package:dnd_companion/features/characters/screens/steps/equipment_step.dart';
 import 'package:dnd_companion/features/characters/screens/steps/origins_step.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
@@ -196,10 +198,8 @@ class _CharacterCreationScreenState extends State<CharacterCreationScreen> {
                     const OriginsStep(),
                     const ClassStep(),
                     const BackgroundStep(),
-                    _buildPlaceholder(
-                      'Ability score generation (standard array or manual)',
-                    ),
-                    _buildPlaceholder('Starting equipment selection'),
+                    const AbilitiesStep(),
+                    const EquipmentStep(),
                   ],
                 ),
               ),

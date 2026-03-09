@@ -62,7 +62,7 @@
 
 ### Phase 3: The "Dumb" UI (Character Sheet)
 
-1. Build the character selection screen.
+1. Build the character selection screen. **DONE**
 2. Build the tabbed character sheet layout.
 3. Create the data-entry forms (Edit Stats, Add Spell, Add Item).
 4. Connect UI to Firebase to enable saving/editing.

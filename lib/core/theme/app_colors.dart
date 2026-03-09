@@ -14,4 +14,5 @@ class AppColors {
   static const Color accentPurple = Colors.deepPurpleAccent;
   static const Color legendaryGold = Color(0xFFFFD700);
   static const Color arcaneBlue = Color(0xFF00D4FF);
+  static const Color backgroundDark = Color(0xFF121212);
 }
